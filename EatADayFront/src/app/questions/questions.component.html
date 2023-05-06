@@ -1,0 +1,11 @@
+<h1 class=" text-center mb-[3%] mt-[3%] font-bold italic text-gray-800 text-[20px] md:text-2xl xl:text-3xl" >PREGUNTAS FRECUENTES</h1>
+<div class="mt-5 mb-[10%]">
+  <ul class="list-reset flex flex-col text-center items-center" *ngFor="let question of allQuestions?.data" >
+    <li class="bg-gray-400 border-t-4 w-8/12 md:w-6/12 lg:w-4/12" *ngIf="question.isChecked"></li>
+    <li class="relative block w-8/12 md:w-6/12 lg:w-4/12 mt-2 mb-2 ml-4 text-xs sm:text-sm md:text-base" *ngIf="question.isChecked">
+      <a class="text-gray-600 italic uppercase whitespace-pre-wrap" *ngIf="question.isChecked" routerLink="/QuestionDetail/{{question.id}} ">
+        {{question.title}}
+      </a>
+    </li>
+  </ul>
+</div>

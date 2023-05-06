@@ -1,0 +1,102 @@
+<div class="flex flex-col h-full w-full">
+  <div *ngIf="supermarket" class="w-full flex items-center justify-center p-3 pt-0 bg-gray-300">
+    <div class="flex flex-col items-center justify-center ">
+      <div class="flex justify-center items-center p-1">
+        <h1 class="text-lg">{{ supermarket.name }}</h1>
+      </div>
+      <button (click)="closeSupermarkets()"
+        class="flex items-center bg-[#61B82C] p-[0.5rem] py-[0.3rem] rounded-full [text-shadow:_0px_1px_1px_black;]  shadow-md hover:shadow-none focus:shadow-none shadow-slate-500  gap-1 text-white"><img
+          src="assets/img/icons/lupa.png" class="h-4" alt=""> Buscar {{ supermarket.name }}s más cercanos</button>
+    </div>
+
+  </div>
+  <button type="button" (click)="goBack()"
+    class=" absolute top-38 bg-stone-700 hover:bg-stone-600 max-[320px]:mt-[30%] text-white font-bold py-2 px-4  ml-[4%] rounded-full mb-3  text-[10px] sm:text-[15px] md:text-[15px] xl:text-[18px] mt-5">⮌</button>
+
+  <div *ngIf="userShoppingList ;else sinIngredientes"
+    class=" relative flex flex-col w-full items-center justify-center ">
+
+    <div class="bg-yellow-200  flex items-center justify-center h-[12rem]  w-full md:w-[50%] md:my-2 overflow-y-scroll [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+      <div class="flex flex-col items-center justify-center w-[80%] h-full">
+        <h1 class="mb-3 text-[1.02rem] mt-1">Productos por comprar de {{ supermarket.name }} </h1>
+        <ul class="w-[80%]   h-full flex flex-col gap-1 overflow-y-scroll [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+          <li *ngFor="let ingredient of userShoppingList" class="flex   justify-between pr-1 items-center p-1 ">
+            <div>{{ ingredient.name}}</div>
+            <div>
+
+              <button (click)="chose(ingredient)"><img src="assets/img/icons/adddiary.png" class="h-5" alt=""></button>
+
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <ng-template #sinIngredientes class="w-full flex items-center justify-center">
+    <div class="flex items-center justify-center">
+      <p>Tu lista está vacía inserta alimentos nuevos</p>
+    </div>
+
+  </ng-template>
+  <div class=" w-full flex bg-gray-400 items-center justify-center flex-col gap-3 ">
+    <div *ngIf="supermarket" >
+      <h1>Mis Productos de {{ supermarket.name }}</h1>
+    </div>
+    <ul class="flex flex-col gap-2 h-[8rem] md:h-[9rem] lg:h-[10rem]  w-[93%] overflow-y-scroll  [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+
+      <li *ngFor="let ingredient of userBoughtShoppingList"
+        class="  w-full flex items-center bg-gray-100 justify-between">
+        <div class="flex items-center gap-3  p-2 px-4 md:px-6 md:pr-3">
+          <p class="text-lg">{{ ingredient.name}}</p>
+          <p>{{ ingredient.price }}€</p>
+          <p>{{ ingredient.price_k }}€/kg</p>
+          <div *ngIf="ingredient.priceUp;  else priceUpFalse"><img src="assets/img/icons/ROJObillete.png"
+            class="h-7" alt=""></div>
+          <ng-template #priceUpFalse>
+            <div *ngIf="ingredient.priceUp !=null "><img src="assets/img/icons/VERDEbillete.png"
+              class="h-7" alt=""></div>
+          </ng-template>
+          <div *ngIf="ingredient.userLike == 1; else userLikeFalse"><img src="assets/img/icons/tumbsUp.png"
+              class="h-7" alt=""></div>
+          <ng-template #userLikeFalse>
+            <div *ngIf="ingredient.userLike !== null"><img src="assets/img/icons/thumbsDown.png" class="h-7" alt="">
+            </div>
+          </ng-template>
+        </div>
+        <div class="flex gap-1 items-center pr-2">
+          <button (click)="openEditModal(ingredient)"><img src="assets/img/icons/adddiary.png"
+            class="h-7" alt=""></button>
+          <button (click)="chose(ingredient)"><img src="assets/img/icons/papelera.png"
+            class="h-7" alt=""></button>
+
+        </div>
+      </li>
+
+    </ul>
+  </div>
+  <div *ngIf="this.deleteModal===true" class="flex flex-col items-center justify-center gap-7">
+    <div class="bg-gray-300 rounded-md  absolute top-[35%] right-[50%] translate-x-[50%] translate-y-[50%] p-3">
+      <div><button (click)="delete()"><img src="assets/img/icons/papelera.png" alt=""></button><button (click)="setBoughtTrue()"><img src="assets/img/icons/tick.png" alt=""></button></div>
+    </div>
+  </div>
+  <div *ngIf="this.editModal===true" class="flex flex-col items-center justify-center">
+    <div class="bg-gray-200 rounded-md absolute  top-[20%]  lg:right-[42%] px-7 p-3 lg:px-9">
+
+
+      <div class="flex items-center justify-center text-xl mb-3">
+        <h2>Edita el registro</h2>
+      </div>
+      <div>
+        <app-edit-modal [ingredientToEdit]="ingredientToEdit" [userId]="id" [supermarket]="supermarket"
+          (eventEdit)="recharge()"></app-edit-modal>
+      </div>
+
+
+
+
+
+
+    </div>
+
+  </div>
+</div>

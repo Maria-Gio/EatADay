@@ -1,0 +1,28 @@
+<div class=" fixed h-full w-full  left-0 bottom-0 bg-slate-600/70  bg-cover">
+  <div
+    class="bg-gray-100/70 rounded-lg  absolute top-[35%] md:top-[30%] right-[50%] translate-x-[50%] translate-y-[50%] p-3">
+    <button (click)="close()" class=" absolute top-[-1rem] left-[-0.5rem] "><img src="assets/img/icons/close.png"
+        alt=""></button>
+
+
+    <input type="text" placeholder="Buscar por nombre..." #inputSearch
+      class="rounded-full pl-1 bg-gray-100 outline-none focus:outline-1" (input)="search(inputSearch.value)">
+
+    <ul class="max-h-[7rem] overflow-y-auto flex flex-col   mt-2  gap-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+      <li *ngFor="let ingredient of ingredientsFound$ | async " class="bg-gray-400">
+
+
+        <div (click)="addToRecipeList(ingredient)" class="bg-white pl-2">
+          {{ ingredient.name }}
+        </div>
+
+
+      </li>
+
+    </ul>
+
+
+
+
+  </div>
+</div>

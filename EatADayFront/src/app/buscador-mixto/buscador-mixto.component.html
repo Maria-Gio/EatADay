@@ -1,0 +1,40 @@
+<div class=" flex flex-col  justify-center items-center">
+  <div class="w-full flex flex-col gap-2 items-center justify-center py-3 pt-1">
+    <div>
+      <p class="text-xl">Busca aquí tus alimentos</p>
+    </div>
+
+    <input type="text" class="w-[80%] mt-3 px-3 py-2  bg-[#f3f3f3] border shadow-sm border-slate-300 placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block  rounded-md sm:text-sm focus:ring-1 drop-shadow-lg"
+      placeholder="Patata, leche... " #inputSearch (input)="search(inputSearch.value)">
+
+
+
+  </div>
+  <div class="relative bg-gray-400 w-full h-[10rem] lg:h-[13.2rem]">
+    <div class=" absolute top-0 left-0  w-full flex items-center justify-center flex-col pt-4">
+
+      <ul class="flex flex-col gap-2 h-[8rem] lg:h-[9.5rem]  w-[85%] overflow-y-scroll [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none'] ">
+        <li *ngFor="let ingredient of ingredientsFound$ | async "
+          class="bg-gray-100  w-full flex items-center justify-between">
+
+          <div class="flex items-center justify-between  w-[75%] md:w-[88%]  p-1 ">
+            <div class="text-[1rem] md:text-[1.1rem] pl-1 font-weight-bolder">
+              {{ ingredient.name }}
+            </div>
+            <div class="text-sm">{{ ingredient.price_k }}€/k</div>
+          </div>
+          <div class=" text-sm pr-4 flex items-center gap-1 md:gap-2">
+            <button (click)="toUserList(ingredient)"><img src="assets/img/icons/adddiary.png" class="h-6"
+                alt=""></button>
+            <button (click)="choseSupermarket(ingredient)"><img src="assets/img/icons/supercorapng.png" class="h-6"
+                alt=""></button>
+          </div>
+
+
+
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</div>

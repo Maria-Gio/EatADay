@@ -1,0 +1,30 @@
+<form [formGroup]="formulario" class="flex flex-col items-center justify-center gap-3">
+  <label class="flex flex-col">
+    Nombre:
+    <input type="text" formControlName="name"
+      class="w-full p-2  bg-[#f3f3f3] border shadow-sm border-slate-300 placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block  rounded-md sm:text-sm focus:ring-1 drop-shadow-lg">
+  </label>
+  <label class="flex flex-col">
+    Precio/Kg:
+    <input type="number" formControlName="price_k"
+      class="w-full p-2  bg-[#f3f3f3] border shadow-sm border-slate-300 placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block  rounded-md sm:text-sm focus:ring-1 drop-shadow-lg">
+  </label>
+  <label class="flex flex-col">
+    Precio:
+    <input type="number" formControlName="price"
+      class="w-full p-2  bg-[#f3f3f3] border shadow-sm border-slate-300 placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block  rounded-md sm:text-sm focus:ring-1 drop-shadow-lg">
+  </label>
+  <div class="flex gap-4"><label class="flex">
+
+      <input type="radio" value="1" formControlName="userLike">
+      <img src="assets/img/icons/tumbsUp.png" class="h-10" alt="">
+    </label>
+    <label class="flex">
+
+      <input type="radio" value="0" formControlName="userLike">
+      <img src="assets/img/icons/thumbsDown.png" class="h-10" alt="">
+    </label>
+  </div>
+
+  <button (click)="saveInfo()" class="flex items-center bg-[#61B82C] p-[0.5rem] py-[0.3rem] px-4 rounded-full [text-shadow:_0px_1px_1px_black;]  shadow-md hover:shadow-none focus:shadow-none shadow-slate-500 text-white mb-3">Save</button>
+</form>

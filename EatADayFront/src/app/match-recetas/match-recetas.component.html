@@ -1,0 +1,59 @@
+<div class="h-full w-full">
+  <div class="flex justify-center items-center flex-col h-[13.5rem] lg:h-[17.6rem] gap-9 py-7 pb-8 ">
+    <div class="flex justify-center items-center ">
+      <h2 class="text-xl md:text-2xl lg:text-3xl">Añade tus ingredientes y crea tu receta</h2>
+    </div>
+    <div *ngIf="ingredientPills.length!=0" class=" flex   scrollbar-hide justify-center items-center w-full">
+      <ul class="absolute flex   overflow-x-scroll gap-2  scrollbar-hide whitespace-nowrap [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+
+        <li *ngFor="let pill of ingredientPills"
+          class="bg-[#bdebe0] z-40  w-fit px-3 lg:px-1 rounded-full flex-shrink-0  ">
+          <button (click)="deleteFromIngredientList(pill)" class="px-1">{{ pill.name }}</button>
+        </li>
+      </ul>
+    </div>
+    <div class="flex justify-center items-center  ">
+      <button (click)="getShowFinder()"
+        class="bg-green-400 active:bg-green-600 rounded-full p-3 flex items-center justify-center shadow-md shadow-slate-600 focus:shadow-none ">
+        <img src="../assets/addIcon.png" class="invert h-5 md:h-7 active:invert-0" alt="">
+      </button>
+    </div>
+
+  </div>
+  <!-- Comentario de relleno -->
+
+  <div *ngIf="this.showFinder===true" class="flex flex-col items-center justify-center w-full h-full">
+    <app-buscador-alimentos [ingredientPills]="ingredientPills" (eventClose)="close()"></app-buscador-alimentos>
+  </div>
+
+  <div *ngIf="ingredientPills.length!=0" class=" flex  w-full justify-center my-4"><button
+      class="bg-green-400 active:bg-green-600 [text-shadow:_1px_1px_2px_black;] text-white rounded-full p-3 flex items-center justify-center"
+      (click)="searchRecipe()">Busca tu receta</button></div>
+
+
+  <div class="bg-gray-300/60  h-[13rem] lg:h-[16.2rem]">
+    <div *ngIf="recipesFound$.length===0 ; else resultRecetas"><app-recetas-top></app-recetas-top></div>
+    <ng-template #resultRecetas>
+      <div class=" flex flex-col gap-3 justify-center items-center  ">
+
+        <div class=" flex flex-col  p-3">
+          <h1 class="pt-3 lg.pt-0 text-xl md:text-2xl lg:text-3xl lg:mb-2">Recetas con tus ingredientes</h1>
+          <ul class="flex flex-col gap-2 my-3 mb-4 lg:mb-3  border-4 border-gray-300 ">
+            <li *ngFor="let recipe of recipesFound$" class="bg-gray-300">
+
+
+              <div class="text-center md:text-lg lg:text-xl bg-white p-1 lg:p-2">
+                <a routerLink="/RecipeDetail/{{recipe.id}}">{{ recipe.title}}</a>
+
+              </div>
+
+
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+
+</div>

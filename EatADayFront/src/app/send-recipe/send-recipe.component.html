@@ -1,0 +1,80 @@
+<div class=" flex justify-center text-orange-400 font-bold italic">
+  <p class="w-[50%] text-center  mt-3 rounded-tr-lg xl:text-[20px]">SUGIERE TU RECETA</p>
+  <button class="bg-[#D5D5D5] w-[50%] h-[50px] shadow-inner shadow-gray-600 italic xl:text-[20px]" routerLink="/user-questions">HAZNOS TU PREGUNTA</button>
+</div>
+<!-- mt-[10%] md:mb-[12%] mb-[25%] md:mt-[5%] lg:mt-[3%] lg:mb-[8%] -->
+
+<div class="rounded-full flex justify-center italic my-3 mb-6">
+  <form [formGroup]="recipesForm" (ngSubmit)="recipeCheck()" class="pt-3 w-[70%]">
+    <label for="title" class="block" id="title">
+      <span class=" after:text-red-500 block  font-medium text-slate-700 w-[50] text-[16px] md:text-[20px] xl:text-[25px]">
+        Titulo de la receta:
+      </span>
+    </label>
+    <input formControlName="title" type="text" id="title"
+      class="w-[100%] mt-3 px-3 py-2  bg-[#f3f3f3] border shadow-sm border-slate-300 placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block  rounded-md sm:text-sm focus:ring-1 drop-shadow-lg"
+      placeholder="Ej: Macarrones con tomate"><br>
+    <div>
+      <small *ngIf="recipesForm.get('title').invalid && recipesForm.get('title').touched">
+        Éste campo es obligatorio
+      </small>
+    </div>
+
+
+    <!-- <label for="photo" class="block" id="photo">
+      <span class="after:content-['*'] mt-3 after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-[16px] md:text-[20px] xl:text-[25px]">
+        Foto de la receta:
+      </span>
+    </label>
+    <input formControlName="photo" type="text" id="photo"
+      class="mt-3 px-3 py-2  bg-[#f3f3f3] border shadow-sm border-slate-300 placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1 drop-shadow-lg"
+      placeholder="Ej: https://www.Ruta-De-la-Foto.com"><br>
+    <div>
+      <small *ngIf="recipesForm.get('photo').invalid && recipesForm.get('photo').touched">
+        Éste campo es obligatorio
+      </small>
+    </div> -->
+
+    <label for="ingredients" class="block" id="ingredients">
+      <span class="after:content-['*'] mt-3 after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-[16px] md:text-[20px] xl:text-[25px]">
+        Ingredientes:
+      </span>
+    </label>
+    <input formControlName="ingredients" type="text" id="ingredients"
+      class="mt-3  px-3 py-2  bg-[#f3f3f3] border shadow-sm border-slate-300 placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1 drop-shadow-lg"
+      placeholder="Ej: 1 Tomate, 500g de macarrones, 100g de carne picada etc"><br>
+    <div>
+      <small *ngIf="recipesForm.get('ingredients').invalid && recipesForm.get('ingredients').touched">
+        Éste campo es obligatorio
+      </small>
+    </div>
+
+    <label for="description" class="block" id="description">
+      <span class="after:content-['*'] mt-3 after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-[16px] md:text-[20px] xl:text-[25px]">
+        Preparacion:
+      </span>
+    </label>
+    <textarea formControlName="description" type="tex" id="description"
+      class="mt-3  px-3 py-2  h-[25%] bg-[#f3f3f3] border shadow-sm border-slate-300 placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1 drop-shadow-lg"
+      placeholder="Pasos para realizar la preparacion de la receta"></textarea><br>
+    <div>
+      <small *ngIf="recipesForm.get('description').invalid && recipesForm.get('description').touched" class="pb-5">
+        Éste campo es obligatorio
+      </small>
+    </div>
+
+
+    <div class="flex flex-items justify-center mb-[7%]">
+      <div class="pr-3 lg:pr-6">
+        <button (click)="reset()"
+        class="mt-5 border border-[#9EAFA2] bg-[#9EAFA2] text-white rounded-full px-8 py-2 m-3 transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline drop-shadow-lg">Borrar</button>
+      <br>
+      </div>
+
+      <button [disabled]="recipesForm.invalid" type="submit"
+        class="mt-5 border border-green-500 bg-green-500 text-white rounded-full px-8 py-2 m-3 transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline drop-shadow-lg">Enviar</button>
+      <br>
+    </div>
+
+  </form>
+</div>
