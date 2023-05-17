@@ -13,24 +13,26 @@ import { SendRecipeComponent } from './send-recipe/send-recipe.component';
 
 
 
-import {LoginGGuard} from "./login-g.guard";
+import { LoginGGuard } from "./login-g.guard";
 import { VidasanaComponent } from './vidasana/vidasana.component';
 import { VidasanaDetailComponent } from './vidasana-detail/vidasana-detail.component';
 import { SugerenceRecipeService } from './sugerence-recipe.service';
 import { UserQuestionsComponent } from './user-questions/user-questions.component';
+import { ValidateEmailComponent } from './validate-email/validate-email.component';
 
 const routes: Routes = [
 
   { path: 'login', component: LoginComponent },
+  { path: 'verify', component: ValidateEmailComponent },
   { path: 'matchAlimentos', component: MatchRecetasComponent },
   { path: 'RecipeDetail/:id', component: RecipeDetailComponent },
-  { path: 'QuestionDetail/:id', component: QuestionDetailComponent, canActivate:[LoginGGuard] },
-  { path: 'shoppingDiary', component: ShoppingDiaryComponent, canActivate:[LoginGGuard] },
-  { path: 'send-recipe', component: SendRecipeComponent, canActivate:[LoginGGuard] },
-  { path: 'supermarketDetail/:id', component: SupermarketDetailComponent, canActivate:[LoginGGuard] },
-  { path: 'closeSupermarkets/:id', component: CloseSupermarketsComponent, canActivate:[LoginGGuard] },
+  { path: 'QuestionDetail/:id', component: QuestionDetailComponent, canActivate: [LoginGGuard] },
+  { path: 'shoppingDiary', component: ShoppingDiaryComponent, canActivate: [LoginGGuard] },
+  { path: 'send-recipe', component: SendRecipeComponent, canActivate: [LoginGGuard] },
+  { path: 'supermarketDetail/:id', component: SupermarketDetailComponent, canActivate: [LoginGGuard] },
+  { path: 'closeSupermarkets/:id', component: CloseSupermarketsComponent, canActivate: [LoginGGuard] },
   { path: 'vidasana', component: VidasanaComponent },
-  { path: 'vidasanaDetail/:id', component: VidasanaDetailComponent, canActivate:[LoginGGuard] },
+  { path: 'vidasanaDetail/:id', component: VidasanaDetailComponent, canActivate: [LoginGGuard] },
   { path: 'questions', component: QuestionsComponent },
   { path: 'questions', component: QuestionsComponent },
   { path: 'user-questions', component: UserQuestionsComponent },

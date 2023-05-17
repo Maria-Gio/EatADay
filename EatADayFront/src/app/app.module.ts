@@ -39,6 +39,7 @@ import { VidasanaDetailComponent } from './vidasana-detail/vidasana-detail.compo
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserQuestionsComponent } from './user-questions/user-questions.component';
 import { SubHeaderComponent } from './sub-header/sub-header.component';
+import { ValidateEmailComponent } from './validate-email/validate-email.component';
 
 
 
@@ -78,7 +79,8 @@ import { SubHeaderComponent } from './sub-header/sub-header.component';
     VidasanaComponent,
     VidasanaDetailComponent,
     UserQuestionsComponent,
-    SubHeaderComponent
+    SubHeaderComponent,
+    ValidateEmailComponent
 
   ],
   imports: [

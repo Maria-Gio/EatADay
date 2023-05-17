@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class LoginController extends Controller
 {
@@ -42,11 +43,11 @@ class LoginController extends Controller
             ];
             return response()->json($response, 201);
         }
-
-        $user =User::create([
+        var_dump(Str::random(40));
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            // 'password' => bcrypt($request->password)
+            'mailToken' => Str::random(40),
             'password' => Hash::make($request->password)
         ]);
         $response = [
@@ -75,7 +76,7 @@ class LoginController extends Controller
 
             if (Auth::attempt($data)) {
                 $token = Auth::user()->createToken("token")->accessToken;
-                $user =  Auth::user();
+                $user = Auth::user();
                 $user->token = $token;
 
                 $response = [

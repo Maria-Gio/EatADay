@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\RecipeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -39,7 +40,8 @@ Route::group(
         Route::get('/soyyo', [LoginController::class, 'userInfo']);
     }
 );
-
+//Email
+Route::get('email/{token}',[EmailVerificationController::class,'sendEmail']);
 //USER
 Route::prefix('/users')->group(function () {
     Route::controller(UserController::class)->group(

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
-import {catchError, map, Observable, of} from "rxjs";
-import {Login} from "./login";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
+import { catchError, map, Observable, of } from "rxjs";
+import { Login } from "./login";
 import { ApiResponse } from './apiResponse';
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -33,15 +33,22 @@ export class LoginService {
         return of({ success: false, message: errorMessage, data: null });
       })
     ).pipe(map((token: any) => {
-        if(token.success) {
-          localStorage.setItem("token", token.data.token);
-          localStorage.setItem("user", JSON.stringify(token.data));
-          if (localStorage.getItem('token')) {
+      if (token.success) {
+        localStorage.setItem("token", token.data.token);
+        localStorage.setItem('mailToken', token.data.token);
+        localStorage.setItem("user", JSON.stringify(token.data));
+        if (localStorage.getItem('token')) {
+          if (localStorage.getItem('verified')) {
             this.router.navigate(['matchAlimentos']);
           }
-          return true
+          console.log('fallo verificado')
+
+          this.router.navigate(['verify']);
+          //Meter aqui ruta al ternativa a no email verificado
+        }
+        return true
       }
-        return  false;
+      return false;
     }))
   }
 
@@ -49,7 +56,7 @@ export class LoginService {
 
   public getIdRoleUserLoged(): Observable<ApiResponse> {
     let token: string = localStorage.getItem('token');
-    return this.http.get<ApiResponse>(this.getUserLogged, {headers: {"Accept": "application/json", "Authorization": `Bearer ${token}`}}).pipe(
+    return this.http.get<ApiResponse>(this.getUserLogged, { headers: { "Accept": "application/json", "Authorization": `Bearer ${token}` } }).pipe(
       catchError(e => {
         console.error(e);
         return [];
@@ -58,6 +65,8 @@ export class LoginService {
       localStorage.setItem("roleUserId", result.data.role_id);
       let id = localStorage.getItem('roleUserId');
       let userRole = JSON.parse(id)
+      console.log('isLoggedIn')
+      console.log(result.data)
       console.log(userRole);
       return result;
     }))

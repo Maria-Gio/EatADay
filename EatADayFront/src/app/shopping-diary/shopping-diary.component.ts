@@ -22,6 +22,7 @@ export class ShoppingDiaryComponent implements OnInit {
   public selectedSupermarket: Supermarket;
   // @Input() modalSupermarket: Supermarket[];
   public  id = JSON.parse(localStorage.getItem('user')).id;
+  public  verified = localStorage.getItem('mailToken');
 
   // public id: number = 2;
   public ingredientToUserList: Ingredients;
